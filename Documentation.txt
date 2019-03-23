@@ -1,0 +1,20 @@
+Design Pattern 1
+6. what is the Code Coverage you were able to reach
+
+Ans: I were able to reach 85%. Code in Main.java do not need to be tested.
+
+7. Explain in your own words in detail why you chose that Design Pattern (which one was it), why you believe this improved the code and what you learned by applying this pattern.
+
+Ans: I chose Strategy design pattern. I chose this pattern was because the characteristic of Strategy was to encapsulate the detail of each algorithm and make them interchangable during runtime. Based on the code given, three different algorithms for different majors can be calculated during runtime.
+
+//====================================
+
+Design Pattern 2
+
+6. what is the Code Coverage you were able to reach
+
+Ans: I were able to reach 0%. Print to console, nothing to test.
+
+7. Explain in your own words in detail why you chose that Design Pattern (which one was it), why you believe this improved the code and what you learned by applying this pattern.
+
+Ans: I chose Composite design patter. I chose this pattern because the given code matches the characteristic of Composite design pattern, which describes a group of objects that is treated the same way as a single instance of the same type of object.
