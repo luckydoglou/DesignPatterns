@@ -8,6 +8,17 @@ public class Student {
     private int quizzesPoints;
     private double finalGrade;
 
+    // different major will be applied different strategy
+    private Strategy algorithmCs;
+    private Strategy algorithmSer;
+    private Strategy algorithmIt;
+
+    /**
+     * Constructor.
+     * @param name student name
+     * @param major student major
+     * @param grades collection of a student grades
+     */
     public Student(String name, Major major, int[] grades) {
         this.name = name;
         this.major = major;
@@ -16,34 +27,30 @@ public class Student {
         this.projectPoints = grades[2];
         this.quizzesPoints = grades[3];
 
+        algorithmCs = new AlgorithmCs(); // CS major
+        algorithmSer = new AlgorithmSer(); // SER major
+        algorithmIt = new AlgorithmIt(); // IT major
     }
 
-    // assume that the fancy printlns and the line below in here are some calculates or really some fancy algorithms for calculating grades/gpa etc 
-    public void calculateFinalGrade() {
-        System.out.println(name + " is in major " + major);
+    // assume that the fancy printlns and the line below in here are some calculates
+    // or really some fancy algorithms for calculating grades/gpa etc
+    /**
+     * This method calculates the final grade of the student.
+     * @return the finalGrade
+     */
+    public double calculateFinalGrade() {
         if (major == Major.SER) {
-            // all this is assumed to be something fancy special for this major
-            System.out.println("Some fancy algorithms applies for SER students to calculate their grades. Grade for this student:");
-            finalGrade = 0.3 * finalExamPoints + 0.35 * assignmentsPoints + 0.35 * projectPoints;
-            System.out.println(finalGrade);
+            finalGrade = algorithmSer.algorithm(
+                    finalExamPoints, assignmentsPoints, projectPoints, quizzesPoints);
+        } else if (major == Major.CS) {
+            finalGrade = algorithmCs.algorithm(
+                    finalExamPoints, assignmentsPoints, projectPoints, quizzesPoints);
+        } else if (major == Major.IT) {
+            finalGrade = algorithmIt.algorithm(
+                    finalExamPoints, assignmentsPoints, projectPoints, quizzesPoints);
         }
-        else if (major == Major.CS) {
-         // all this is assumed to be something fancy special for this major
-            System.out.println("Some other fancy algorithms applies for CS students. Grade for this student: ");
-            finalGrade = 0.4 * finalExamPoints + 0.25 * assignmentsPoints + 0.25 * projectPoints + 0.1 * quizzesPoints;
-            System.out.println(finalGrade);
-        }
-        else if (major == Major.IT) {
-         // all this is assumed to be something fancy special for this major
-            System.out.println("An even fancier agorithm applies here, since I do not even know if this major exists. Grade for this student:\"");
-            finalGrade = 0.8 * finalExamPoints +  0.2 * projectPoints;
-            System.out.println(finalGrade);
-        }
-
+        System.out.println(finalGrade);
+        return finalGrade;
     }
-
-
-
-
 
 }

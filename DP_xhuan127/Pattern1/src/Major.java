@@ -1,6 +1,4 @@
 
-
-public enum Major 
-{ 
-    SER, CS, IT; 
-} 
+public enum Major {
+    SER, CS, IT;
+}
