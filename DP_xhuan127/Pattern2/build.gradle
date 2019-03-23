@@ -1,40 +1,25 @@
 plugins {
-   id  'com.github.spotbugs' version '1.6.10'
- }
+  id 'com.github.spotbugs' version '1.7.1'
+}
 
-apply plugin: 'java'
 apply plugin: 'application'
-//apply plugin: 'jacoco'
 
-mainClassName = 'main/java/memoranda/Start'
 
-compileJava.options.encoding = 'UTF-8'
 
+///////////////////////////////////////////////////////////////////////////
+// Definint Main class
+///////////////////////////////////////////////////////////////////////////
+mainClassName = 'main.java.Main'
+
+///////////////////////////////////////////////////////////////////////////
 // Repositories and dependencies for code go here
+///////////////////////////////////////////////////////////////////////////
+// dependencies {
+//   spotbugsPlugins 'com.h3xstream.findsecbugs:findsecbugs-plugin:1.6.11'
+// }
 repositories {
   mavenCentral()
 }
-
-dependencies {
-  compile 'com.io7m.xom:xom:1.2.+'
-  compile 'net.sourceforge.nekohtml:nekohtml:1.9.+'
-  compile 'junit:junit:4.12'
-}
-
-///////////////////////////////////////////////////////////////////////////
-// Configure Jacoco
-///////////////////////////////////////////////////////////////////////////
-//jacoco {
-//    toolVersion = "0.8.0"
-//    reportsDir = file("$buildDir/customJacocoReportDir")
-//}
-//jacocoTestReport {
-//    reports {
-//        xml.enabled false
-//        csv.enabled false
-//        html.destination file("${buildDir}/myHTMLreport")
-//    }
-//}
 
 ///////////////////////////////////////////////////////////////////////////
 // Configure Checkstyle
@@ -44,6 +29,10 @@ checkstyle {
   // Keep checkstyle a little quieter
   ignoreFailures = true
   showViolations = false
+  configFile = rootProject.file('config/checkstyle/checkstyle.xml')
+}
+checkstyleMain {
+    source ='src/main/java'
 }
 
 tasks.withType(Checkstyle) {
@@ -56,33 +45,20 @@ checkstyle {
     toolVersion = "8.8"
 }
 
+
 ///////////////////////////////////////////////////////////////////////////
 // Configure SpotBugs
 ///////////////////////////////////////////////////////////////////////////
- 
- spotbugs {
- //https://github.com/spotbugs/spotbugs-gradle-plugin/blob/c22c1b04f58cee797b0594031f324bd57391d58d/src/main/java/com/github/spotbugs/SpotBugsExtension.java
-   toolVersion = '3.1.1'
-   ignoreFailures = true
-   reportLevel = "high"
-   effort="min"
- }
+apply plugin: 'com.github.spotbugs'
 
-// // To generate an HTML report instead of XML
- tasks.withType(com.github.spotbugs.SpotBugsTask) {
-   reports {
-     xml.enabled = false
-     html.enabled = true
-   }
- }
+spotbugs {
+  toolVersion = '3.1.11'
+}
 
- ///////////////////////////////////////////////////////////////////////////
-// Configure Jacoco
-///////////////////////////////////////////////////////////////////////////
-// test {
-//    jacoco {
-//        append = false
-//        destinationFile = file("$buildDir/jacoco/jacocoTest.exec")
-//        classDumpDir = file("$buildDir/jacoco/classpathdumps")
-//    }
-//}
+// To generate an HTML report instead of XML
+tasks.withType(com.github.spotbugs.SpotBugsTask) {
+  reports {
+    xml.enabled = false
+    html.enabled = true
+  }
+}

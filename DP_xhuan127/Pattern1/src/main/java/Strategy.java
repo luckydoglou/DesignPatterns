@@ -1,3 +1,4 @@
+package main.java;
 /**
  * This interface class calculates the final grade of students.
  * @author Xiaolou Huang

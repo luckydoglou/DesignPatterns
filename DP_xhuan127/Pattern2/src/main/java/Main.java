@@ -1,10 +1,14 @@
+package main.java;
 
 public class Main {
 
+    /**
+     * Main method.
+     * @param args input
+     */
     public static void main(String[] args) {
         // Lets create a tree. Lets assume a node can have 1-2 nodes or leafs. 
         // We only want to allow the Node to have at most 2 "children"
-
         Leaf l1 = new Leaf(1);
         Leaf l2 = new Leaf(2);
         Leaf l3 = new Leaf(3);
@@ -17,7 +21,7 @@ public class Main {
         Node n4 = new Node(n2, n3,4);
         
         n4.print();
-        
+
     }
 
 }

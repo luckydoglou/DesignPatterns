@@ -1,5 +1,6 @@
+package main.java;
 
-public class Leaf {
+public class Leaf implements Composite {
     int number;
     String name = "leaf";
     
@@ -8,6 +9,7 @@ public class Leaf {
         name = name + number;
     }
     
+    @Override
     public void print() {
         System.out.println(name);
     }
